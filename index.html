@@ -29,41 +29,58 @@
         .badge-failed {
             background-color: #f44336;
         }
+
+        .date_formatted {
+            color: grey;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="card p-4">
-            <h3 class="text-center">Cek Kepribadian STIFIn</h3>
-            <form id="formStifin">
-                <div class="mb-3">
-                    <label for="date" class="form-label">Masukkan Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="date" name="date" required />
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Cek Sekarang</button>
-                </div>
-            </form>
-
-            <div id="result" class="result-box text-center d-none">
-                <span id="badge" class="badge px-3 py-2 mb-3"></span>
-                <p id="msg" class="fs-5"></p>
-                <a id="link" href="#" target="_blank" class="btn btn-outline-success d-none">Lihat Hasil Lengkap</a>
+        <div class="row">
+            <div class="col-md-2">
             </div>
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <h3 class="text-center">Cek Kepribadian STIFIn</h3>
+                    <form id="formStifin">
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Masukkan Tanggal Lahir</label>
+                            <input type="date" class="form-control" id="date" name="date" required />
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Cek Sekarang</button>
+                        </div>
+                    </form>
 
-            <p class="text-muted small mt-4">
-                <strong>Disclaimer:</strong> Tes ini disediakan hanya untuk hiburan dan refleksi pribadi.
-                Hasil yang ditampilkan tidak menggantikan tes STIFIn resmi yang berbasis biometrik (sidik jari).
-                Untuk hasil akurat dan rekomendasi pengembangan diri yang sahih, silakan kunjungi penyedia STIFIn resmi
-                di
-                <a href="https://stifin.com" target="_blank">stifin.com</a>.
-            </p>
+                    <div id="result" class="result-box text-center d-none">
+                        <p id="kepribadian_anda_adalah" class="fs-5 mb-1"></p>
+                        <span id="badge" class="badge px-3 py-2 mb-0"></span>
+                        <br><span id="date_formatted" class=""></span>
+                        <br>
+                        <br>
+                        <p id="msg" class="fs-5"></p>
+                        <!-- <p class="date_formatted" class="fs-5"></p> -->
+                        <a id="link" href="#" target="_blank" class="btn btn-outline-success d-none">Lihat Hasil
+                            Lengkap</a>
+                    </div>
 
-            <!-- <p class="text-muted small mt-4">
-                *Hanya untuk hiburan. Bukan tes STIFIn resmi.*
-              </p> -->
-              
+                    <p class="text-muted small mt-4">
+                        <strong>Disclaimer:</strong> Tes ini disediakan hanya untuk hiburan dan refleksi pribadi.
+                        Hasil yang ditampilkan tidak menggantikan tes STIFIn resmi yang berbasis biometrik (sidik jari).
+                        Untuk hasil akurat dan rekomendasi pengembangan diri yang sahih, silakan kunjungi penyedia
+                        STIFIn resmi
+                        di
+                        <a href="https://stifin.com" target="_blank">stifin.com</a>.
+                    </p>
+
+                    <!-- <p class="text-muted small mt-4">
+                    *Hanya untuk hiburan. Bukan tes STIFIn resmi.*
+                  </p> -->
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -72,13 +89,16 @@
             e.preventDefault();
             const date = document.getElementById("date").value;
             const resultBox = document.getElementById("result");
+            const kepribadian_anda_adalah = document.getElementById("kepribadian_anda_adalah");
             const badge = document.getElementById("badge");
             const msg = document.getElementById("msg");
+            const date_formatted = document.getElementById("date_formatted");
             const link = document.getElementById("link");
 
             resultBox.classList.add("d-none");
-            badge.className = "badge px-3 py-2 mb-3";
+            badge.className = "badge px-3 py-2 mb-0 fs-5";
             msg.textContent = "";
+            date_formatted.textContent = "";
             link.classList.add("d-none");
 
             try {
@@ -87,16 +107,24 @@
 
                 resultBox.classList.remove("d-none");
 
+                tanggal_formatted = null
+
                 if (data.con) {
                     badge.classList.add("badge-success");
-                    badge.textContent = "Berhasil";
-                    msg.textContent = data.msg;
+                    // badge.textContent = "Berhasil";
+                    kepribadian_anda_adalah.textContent = "Kepribadian anda adalah";
+                    badge.textContent = data.msg;
+                    msg.textContent = data.deskripsi_kepribadian;
+                    date_formatted.textContent = data.date_formatted + " (" + data.umur_sekarang + ")";
                     link.href = data.link;
+                    // tanggal_formatted = data.date_formatted;
                     link.classList.remove("d-none");
                 } else {
                     badge.classList.add("badge-failed");
                     badge.textContent = "Gagal";
                     msg.textContent = data.msg;
+                    date_formatted.textContent = "";
+                    link.href = "#";
                 }
             } catch (error) {
                 resultBox.classList.remove("d-none");
