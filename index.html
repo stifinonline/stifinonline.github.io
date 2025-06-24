@@ -140,7 +140,7 @@
                     link.classList.remove("d-none");
 
                     // Buat konten share
-                    const shareText = `Saya adalah tipe ${data.msg}. ${data.deskripsi_kepribadian} Cek kepribadian anda di Stifin Online: https://stifinonline.github.io/`;
+                    const shareText = `Saya adalah tipe ${data.msg}. ${data.deskripsi_kepribadian} Cek kepribadian anda di Stifin Online: stifinonline.github.io`;
                     // Encode untuk URL
                     const encodedText = encodeURIComponent(shareText);
                     const shareWa = document.getElementById("share-wa");
@@ -149,7 +149,7 @@
                     // Set link WhatsApp & Facebook
                     shareWa.href = `https://wa.me/?text=${encodedText}`;
                     // shareTg.href = `https://t.me/share/url?text=${encodedText}`;
-                    shareTg.href = `https://t.me/share/url?url=https://stifinonline.github.io/&text=${encodedText}`;
+                    shareTg.href = `https://t.me/share/url?url=stifinonline.github.io&text=${encodedText}`;
                     // Tampilkan tombol share
                     shareBox.classList.remove("d-none");
                     shareTg.classList.remove("d-none");
