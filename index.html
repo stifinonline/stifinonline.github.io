@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cek Kepribadian STIFIn</title>
+    <title style="font-family: monospace;">Cek Kepribadian STIFIn</title>
 
     <!-- SEO: Keyword Meta Tag -->
     <meta name="keywords"
@@ -181,35 +181,13 @@
     </script>
 
     <script>
-        // By form get ?date=YYYY-MM-DD
-        document.addEventListener("DOMContentLoaded", function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const dateParam = urlParams.get('date');
-
-            if (dateParam) {
-                const dateInput = document.getElementById("date");
-                const form = document.getElementById("formStifin");
-
-                // Set input value
-                dateInput.value = dateParam;
-
-                // Submit with delay
-                setTimeout(() => {
-                    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-                }, 1000);
-            }
-        });
-    </script>
-
-    <script>
-        // url dynamic
         document.addEventListener("DOMContentLoaded", function () {
             const urlParams = new URLSearchParams(window.location.search);
             const dateParam = urlParams.get('date');
             const dateInput = document.getElementById("date");
             const form = document.getElementById("formStifin");
 
-            // Auto-fill and submit if ?date=... is in URL
+            // Auto-fill and auto-submit jika ada ?date
             if (dateParam) {
                 dateInput.value = dateParam;
                 setTimeout(() => {
@@ -217,7 +195,7 @@
                 }, 1000);
             }
 
-            // Update URL on submit
+            // Update URL saat submit form
             form.addEventListener("submit", function () {
                 const dateValue = dateInput.value;
                 const newUrl = `${window.location.pathname}?date=${encodeURIComponent(dateValue)}`;
@@ -225,6 +203,7 @@
             });
         });
     </script>
+
 
 
 </body>
