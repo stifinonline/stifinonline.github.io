@@ -77,6 +77,7 @@
                             <p class="mb-2">Bagikan hasil Anda:</p>
                             <a id="share-wa" href="#" class="btn btn-success me-2" target="_blank">📲 WhatsApp</a>
                             <a id="share-fb" href="#" class="btn btn-primary" target="_blank">📘 Facebook</a>
+                            <a id="share-tg" href="#" class="btn btn-info mt-2" target="_blank">📨 Telegram</a>
                         </div>
 
                     </div>
@@ -144,13 +145,16 @@
                     const encodedText = encodeURIComponent(shareText);
                     const shareWa = document.getElementById("share-wa");
                     const shareFb = document.getElementById("share-fb");
+                    const shareTg = document.getElementById("share-tg");
                     const shareBox = document.getElementById("share-buttons");
                     // Set link WhatsApp & Facebook
                     shareWa.href = `https://wa.me/?text=${encodedText}`;
-                    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=https://stifinonline.github.io/&quote=${encodedText}`;
-
+                    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=https://stifinonline.github.io&quote=${encodedText}`;
+                    shareTg.href = `https://t.me/share/url?url=https://stifinonline.github.io/&text=${encodedText}`;
                     // Tampilkan tombol share
                     shareBox.classList.remove("d-none");
+                    shareTg.classList.remove("d-none");
+
                     // Buat konten share END
                 } else {
                     kepribadian_anda_adalah.textContent = "";
