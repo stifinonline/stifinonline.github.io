@@ -53,7 +53,8 @@
                     <form id="formStifin">
                         <div class="mb-3">
                             <label for="date" class="form-label">Masukkan Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="date" name="date" placeholder="Masukkan tanggal lahir.." required />
+                            <input type="date" class="form-control" id="date" name="date"
+                                placeholder="Masukkan tanggal lahir.." required />
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Cek Sekarang</button>
@@ -70,6 +71,14 @@
                         <!-- <p class="date_formatted" class="fs-5"></p> -->
                         <a id="link" href="#" target="_blank" class="btn btn-outline-success d-none">Lihat Hasil
                             Lengkap</a>
+
+                        <!-- SHARE -->
+                        <div id="share-buttons" class="mt-3 d-none">
+                            <p class="mb-2">Bagikan hasil Anda:</p>
+                            <a id="share-wa" href="#" class="btn btn-success me-2" target="_blank">📲 WhatsApp</a>
+                            <a id="share-fb" href="#" class="btn btn-primary" target="_blank">📘 Facebook</a>
+                        </div>
+
                     </div>
 
                     <p class="text-muted small mt-4">
@@ -81,7 +90,7 @@
                         <a href="https://stifin.com" target="_blank">stifin.com</a>.
                         <br>
                         <br>
-                        <a href="mailto:theoreticalunique@gmail.com">📬 Email</a>
+                        <a href="mailto:theoreticalunique@gmail.com">📬 Kontak Email</a>
                     </p>
 
                     <!-- <p class="text-muted small mt-4">
@@ -128,6 +137,21 @@
                     link.href = data.link;
                     // tanggal_formatted = data.date_formatted;
                     link.classList.remove("d-none");
+
+                    // Buat konten share
+                    const shareText = `Saya adalah tipe ${data.msg}. ${data.deskripsi_kepribadian} Cek kepribadian anda di Stifin Online: https://stifinonline.github.io/`;
+                    // Encode untuk URL
+                    const encodedText = encodeURIComponent(shareText);
+                    const shareWa = document.getElementById("share-wa");
+                    const shareFb = document.getElementById("share-fb");
+                    const shareBox = document.getElementById("share-buttons");
+                    // Set link WhatsApp & Facebook
+                    shareWa.href = `https://wa.me/?text=${encodedText}`;
+                    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=https://stifinonline.github.io/&quote=${encodedText}`;
+
+                    // Tampilkan tombol share
+                    shareBox.classList.remove("d-none");
+                    // Buat konten share END
                 } else {
                     kepribadian_anda_adalah.textContent = "";
                     badge.classList.add("badge-failed");
@@ -135,61 +159,69 @@
                     msg.textContent = data.msg;
                     date_formatted.textContent = "";
                     link.href = "#";
+
+                    // Hide Sharenya
+                    document.getElementById("share-buttons").classList.add("d-none");
+
                 }
             } catch (error) {
                 resultBox.classList.remove("d-none");
                 badge.classList.add("badge-failed");
                 badge.textContent = "Error";
                 msg.textContent = "Gagal terhubung ke server.";
+
+
+                // Hide Sharenya
+                document.getElementById("share-buttons").classList.add("d-none");
             }
         });
     </script>
 
     <script>
-    // By form get ?date=YYYY-MM-DD
-    document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const dateParam = urlParams.get('date');
+        // By form get ?date=YYYY-MM-DD
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dateParam = urlParams.get('date');
 
-        if (dateParam) {
+            if (dateParam) {
+                const dateInput = document.getElementById("date");
+                const form = document.getElementById("formStifin");
+
+                // Set input value
+                dateInput.value = dateParam;
+
+                // Submit with delay
+                setTimeout(() => {
+                    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                }, 1000);
+            }
+        });
+    </script>
+
+    <script>
+        // url dynamic
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dateParam = urlParams.get('date');
             const dateInput = document.getElementById("date");
             const form = document.getElementById("formStifin");
 
-            // Set input value
-            dateInput.value = dateParam;
+            // Auto-fill and submit if ?date=... is in URL
+            if (dateParam) {
+                dateInput.value = dateParam;
+                setTimeout(() => {
+                    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                }, 1000);
+            }
 
-            // Submit with delay
-            setTimeout(() => {
-                form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-            }, 1000);
-        }
-    });
-</script>
-
-<script>
-    // url dynamic
-    document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const dateParam = urlParams.get('date');
-        const dateInput = document.getElementById("date");
-        const form = document.getElementById("formStifin");
-
-        // Auto-fill and submit if ?date=... is in URL
-        if (dateParam) {
-            dateInput.value = dateParam;
-            setTimeout(() => {
-                form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-            }, 1000);
-        }
-
-        // Update URL on submit
-        form.addEventListener("submit", function () {
-            const dateValue = dateInput.value;
-            const newUrl = `${window.location.pathname}?date=${encodeURIComponent(dateValue)}`;
-            window.history.replaceState({}, '', newUrl);
+            // Update URL on submit
+            form.addEventListener("submit", function () {
+                const dateValue = dateInput.value;
+                const newUrl = `${window.location.pathname}?date=${encodeURIComponent(dateValue)}`;
+                window.history.replaceState({}, '', newUrl);
+            });
         });
-    });
-</script>
+    </script>
 
 
 </body>
