@@ -81,7 +81,7 @@
                         <a href="https://stifin.com" target="_blank">stifin.com</a>.
                         <br>
                         <br>
-                        <a href="mailto:theoreticalunique@gmail.com">📬 Kontak</a>
+                        <a href="mailto:theoreticalunique@gmail.com">📬 Email</a>
                     </p>
 
                     <!-- <p class="text-muted small mt-4">
@@ -146,6 +146,7 @@
     </script>
 
     <script>
+    // By form get ?date=YYYY-MM-DD
     document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
         const dateParam = urlParams.get('date');
@@ -164,6 +165,32 @@
         }
     });
 </script>
+
+<script>
+    // url dynamic
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const dateParam = urlParams.get('date');
+        const dateInput = document.getElementById("date");
+        const form = document.getElementById("formStifin");
+
+        // Auto-fill and submit if ?date=... is in URL
+        if (dateParam) {
+            dateInput.value = dateParam;
+            setTimeout(() => {
+                form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+            }, 1000);
+        }
+
+        // Update URL on submit
+        form.addEventListener("submit", function () {
+            const dateValue = dateInput.value;
+            const newUrl = `${window.location.pathname}?date=${encodeURIComponent(dateValue)}`;
+            window.history.replaceState({}, '', newUrl);
+        });
+    });
+</script>
+
 
 </body>
 
