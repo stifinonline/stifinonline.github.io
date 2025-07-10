@@ -83,7 +83,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card p-4">
-                    <h3 class="text-center" style="font-family: monospace;">Cek Kepribadian STIFIn Online</h3>
+                    <h3 class="text-center" style="font-family: monospace;">Cek Kepribadian STIFIn</h3>
                     <form id="formStifin">
                         <div class="mb-3">
                             <label for="date" class="form-label">Masukkan Tanggal Lahir</label>
@@ -163,7 +163,8 @@
                 tanggal_formatted = null
 
                 if (data.con) {
-                    badge.classList.add("badge-success premium-badge");
+                    // badge.classList.add("badge-success");
+                    badge.classList.add("premium-badge");
                     // badge.textContent = "Berhasil";
                     kepribadian_anda_adalah.textContent = "Tipe kepribadian anda adalah:";
                     badge.textContent = data.msg;
