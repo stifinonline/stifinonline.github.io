@@ -1,6 +1,3 @@
-Terima kasih! Berdasarkan source code HTML + JavaScript yang Anda berikan, berikut adalah draft **README.md** yang cocok untuk GitHub repository Anda. Silakan ubah bagian seperti nama author atau lisensi sesuai keinginan.
-
----
 
 # 🌟 Cek Kepribadian STIFIn Online
 
