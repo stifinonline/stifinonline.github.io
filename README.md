@@ -34,7 +34,7 @@ Menggunakan API eksternal untuk mengolah tanggal lahir dan menampilkan tipe kepr
 1. Clone repo ini:
 
    ```bash
-   git clone https://github.com/username/nama-repo.git
+   git clone https://github.com/stifinonline/stifinonline.github.io
    ```
 2. Masuk ke folder project:
 
