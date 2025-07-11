@@ -78,8 +78,3 @@ Untuk hasil resmi dan akurat, silakan kunjungi [stifin.com](https://stifin.com).
 
 MIT License.
 Silakan gunakan dan modifikasi untuk keperluan pribadi/non-komersial.
-
----
-
-Kalau sudah cocok, saya bisa bantu buat file `README.md`-nya langsung dalam format Markdown.
-Perlu ditambahkan badge GitHub Actions atau preview deploy (Netlify, GitHub Pages, dsb)?
