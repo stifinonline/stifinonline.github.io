@@ -154,8 +154,8 @@
 
             resultBox.classList.add("d-none");
             badge.className = "badge px-3 py-2 mb-0 fs-5";
-            msg.textContent = "";
-            date_formatted.textContent = "";
+            msg.innerHTML = "";
+            date_formatted.innerHTML = "";
             link.classList.add("d-none");
 
             try {
@@ -169,11 +169,11 @@
                 if (data.con) {
                     badge.classList.add("badge-success");
                     badge.classList.add("premium-badge");
-                    // badge.textContent = "Berhasil";
-                    kepribadian_anda_adalah.textContent = "Tipe kepribadian anda adalah:";
-                    badge.textContent = data.msg;
-                    msg.textContent = data.deskripsi_kepribadian;
-                    date_formatted.textContent = data.date_formatted + " (" + data.umur_sekarang + ")";
+                    // badge.innerHTML = "Berhasil";
+                    kepribadian_anda_adalah.innerHTML = "Tipe kepribadian anda adalah:";
+                    badge.innerHTML = data.msg;
+                    msg.innerHTML = data.deskripsi_kepribadian;
+                    date_formatted.innerHTML = data.date_formatted + " (" + data.umur_sekarang + ")";
                     link.href = data.link;
                     // tanggal_formatted = data.date_formatted;
                     link.classList.remove("d-none");
@@ -199,11 +199,11 @@
 
                     // Buat konten share END
                 } else {
-                    kepribadian_anda_adalah.textContent = "";
+                    kepribadian_anda_adalah.innerHTML = "";
                     badge.classList.add("badge-failed");
-                    badge.textContent = "Gagal";
-                    msg.textContent = data.msg;
-                    date_formatted.textContent = "";
+                    badge.innerHTML = "Gagal";
+                    msg.innerHTML = data.msg;
+                    date_formatted.innerHTML = "";
                     link.href = "#";
 
                     // Hide Sharenya
@@ -213,8 +213,8 @@
             } catch (error) {
                 resultBox.classList.remove("d-none");
                 badge.classList.add("badge-failed");
-                badge.textContent = "Error";
-                msg.textContent = "Gagal terhubung ke server.";
+                badge.innerHTML = "Error";
+                msg.innerHTML = "Gagal terhubung ke server.";
 
 
                 // Hide Sharenya
