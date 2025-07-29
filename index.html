@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card p-4">
-                    <h3 class="text-center" style="font-family: monospace;">Cek Kepribadian STIFIn Online.</h3>
+                    <h3 class="text-center" style="font-family: monospace;">Cek Kepribadian STIFIn Online</h3>
                     <form id="formStifin">
                         <div class="mb-3">
                             <label for="date" class="form-label">Masukkan Tanggal Lahir</label>
@@ -186,7 +186,8 @@
                     link.classList.remove("d-none");
 
                     // Buat konten share
-                    const shareText = `Saya adalah tipe ${data.msg}. ${data.deskripsi_kepribadian} Cek kepribadian anda di STIFIn Online: stifinonline.github.io`;
+                    const raw__text = `Saya adalah tipe ${data.msg}. ${data.deskripsi_kepribadian} Cek kepribadian anda di STIFIn Online: stifinonline.github.io`;
+                    shareText = raw__text.replace(/<\/?[^>]+(>|$)/g, '');
                     // Encode untuk URL
                     const encodedText = encodeURIComponent(shareText);
                     const shareWa = document.getElementById("share-wa");
